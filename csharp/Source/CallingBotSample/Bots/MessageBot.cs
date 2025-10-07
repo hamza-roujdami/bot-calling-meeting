@@ -222,6 +222,10 @@ namespace CallingBotSample.Bots
                     }
                     break;
                 default:
+                    // Get user's name for personalized greeting
+                    var userName = turnContext.Activity.From?.Name ?? "there";
+                    await turnContext.SendActivityAsync($"Hello {userName}! 👋", cancellationToken: cancellationToken);
+                    
                     await turnContext.SendActivityAsync(
                         MessageFactory.Attachment(
                             adaptiveCardFactory.CreateWelcomeCard(turnContext.Activity.ChannelData["meeting"] != null)), cancellationToken);
