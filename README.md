@@ -75,29 +75,48 @@ Update `appsettings.json` with your credentials:
 
 ## Running Locally
 
-1. **Start ngrok**:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/hamza-roujdami/bot-calling-meeting.git
+   cd bot-calling-meeting
+   ```
+
+2. **Setup configuration**:
+   ```bash
+   cd csharp/Source/CallingBotSample
+   cp appsettings.template.json appsettings.json
+   ```
+   Then edit `appsettings.json` and replace all placeholder values with your Azure credentials.
+
+3. **Start ngrok**:
    ```bash
    ngrok http 3978
    ```
 
-2. **Update configuration**:
-   - Copy the ngrok URL
+4. **Update configuration with ngrok URL**:
+   - Copy the ngrok URL (e.g., `https://abc123.ngrok-free.app`)
    - Update `BotBaseUrl` in `appsettings.json`
    - Update Azure Bot Service messaging endpoint
    - Update `validDomains` in `AppManifest/manifest.json`
 
-3. **Run the application**:
+5. **Run the application**:
    ```bash
    cd csharp/Source/CallingBotSample
    dotnet run
    ```
 
-4. **Deploy to Teams**:
-   - Create the manifest.zip:
-     ```bash
-     cd AppManifest
-     zip -r ../manifest.zip .
-     ```
+6. **Update Teams manifest**:
+   - Edit `AppManifest/manifest.json`:
+     - Replace `YOUR_AZURE_AD_APP_ID` with your actual App ID
+     - Replace `YOUR_NGROK_DOMAIN.ngrok-free.app` with your ngrok domain (without https://)
+   
+7. **Create manifest.zip**:
+   ```bash
+   cd AppManifest
+   zip -r ../manifest.zip .
+   ```
+
+8. **Deploy to Teams**:
    - Upload `manifest.zip` to Teams (Apps → Upload a custom app)
 
 ## Project Structure
